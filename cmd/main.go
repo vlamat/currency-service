@@ -15,6 +15,7 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
+// StartScheduler планировщик, который каждый день в 01:00 собирает курсы валют
 func StartScheduler(db *sql.DB) {
 	c := cron.New()
 	// Каждый день в 01:00
@@ -54,6 +55,7 @@ func StartScheduler(db *sql.DB) {
 	c.Start()
 }
 
+// тестовая функция для получения и записи курсов валют
 func fetchAndInsert(dbConn *sql.DB) error {
 	rates, err := service.FetchRatesFromNBRB()
 	if err != nil {

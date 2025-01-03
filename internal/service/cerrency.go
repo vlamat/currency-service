@@ -16,6 +16,7 @@ type NbrbRate struct {
 	CurOfficialRate float64 `json:"Cur_OfficialRate"`
 }
 
+// FetchRatesFromNBRB получает курсы валют с сайта НБРБ
 func FetchRatesFromNBRB() ([]NbrbRate, error) {
 	url := "https://api.nbrb.by/exrates/rates?periodicity=0"
 
