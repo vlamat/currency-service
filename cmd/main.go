@@ -9,6 +9,7 @@ import (
 	"github.com/vlamat/currency-service/internal/db"
 	"github.com/vlamat/currency-service/internal/handlers"
 	"github.com/vlamat/currency-service/internal/repository"
+	"github.com/vlamat/currency-service/internal/service"
 
 	"github.com/gorilla/mux"
 	"github.com/robfig/cron/v3"
@@ -64,7 +65,7 @@ func StartScheduler(db *sql.DB) {
 	c := cron.New()
 	// Каждый день в 01:00
 	c.AddFunc("0 1 * * *", func() {
-		rates, err := FetchRatesFromNBRB()
+		rates, err := service.FetchRatesFromNBRB()
 		if err != nil {
 			log.Println("Error fetching rates:", err)
 			return
