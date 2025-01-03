@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-local
+    environment:
+      # Пароль root-пользователя
+      MYSQL_ROOT_PASSWORD: root
+      # Имя базы данных
+      MYSQL_DATABASE: currency_db
+    ports:
+      - "3306:3306"
+    # Чтобы данные не терялись при перезапуске контейнера
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: currency-service
+    depends_on:
+      - mysql
+    environment:
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: currency_db
+    ports:
+      - "8080:8080"
+volumes:
+  mysqldata:
+    driver: local

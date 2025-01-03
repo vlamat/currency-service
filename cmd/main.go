@@ -81,7 +81,21 @@ func fetchAndInsert(dbConn *sql.DB) error {
 	return repository.InsertCurrencyRates(dbConn, toInsert)
 }
 
+// func getEnv(key, defVal string) string {
+// 	if val, ok := os.LookupEnv(key); ok {
+// 		return val
+// 	}
+// 	return defVal
+// }
+
 func main() {
+
+	// dbUser := getEnv("DB_USER", "root")
+	// dbPassword := getEnv("DB_PASSWORD", "root")
+	// dbHost := getEnv("DB_HOST", "localhost")
+	// dbPort := getEnv("DB_PORT", "3306")
+	// dbName := getEnv("DB_NAME", "currency_db")
+
 	// Подлючение к БД
 	dbConn, err := db.Connect("root", "root", "127.0.0.1", 3306, "currency_db")
 	if err != nil {
